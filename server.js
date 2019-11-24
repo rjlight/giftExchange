@@ -10,7 +10,7 @@ const pool = new Pool({connectionString: connectionString});
 
 app.set("port", (process.env.PORT || 5000));
 
-app.get("/gift.html", getGift);
+app.get("/gift", getGift);
 
 app.listen(app.get("port"), function() {
     console.log("Now listening for connections on port : ", app.get("port"));
