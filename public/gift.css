@@ -1,0 +1,70 @@
+.center {
+    font-family: 'Lucida Calligraphy';
+    grid-area: header;
+    background-color: darkred;
+    color: ivory;
+    max-width: 90%;
+    text-align: center;
+    font-size: 4vw;
+    justify-content: center;
+    padding: 2vw;
+    border-style: solid;
+    border-color: forestgreen;
+} 
+.right {
+    font-family: Georgia, 'Times New Roman', Times, serif;
+    grid-area: right;
+    max-width: 100%;
+    background-color: ivory;
+    color: darkolivegreen;
+    border-style: solid;
+    padding: 1vw;
+    margin: 1vw;
+    border-color: darkred;
+}
+.left {
+    font-family: Georgia, 'Times New Roman', Times, serif;
+    grid-area: left;
+    max-width: 100%;
+    background-color: ivory;
+    color: darkolivegreen;
+    border-style: solid;
+    padding: 1vw;
+    margin: 1vw;
+    border-color: darkred;
+}
+.bottom {
+    font-family: Georgia, 'Times New Roman', Times, serif;
+    grid-area: bottom;
+    max-width: 100%;
+    background-color: ivory;
+    color: darkolivegreen;
+    border-style: solid;
+    padding: 1vw;
+    margin: 1vw;
+    border-color: darkred;
+}
+.body {
+    grid-area: body;
+    max-width: 100%;
+    font-family: Georgia, 'Times New Roman', Times, serif;
+    background-color: ivory;
+    opacity: .8;
+    margin: 2vw;
+    padding: 2vw;
+    color: darkolivegreen;
+    border-color: darkred;
+}
+#page {
+    display: grid;
+    grid-template-areas:
+    'header header header header right'
+    'body body body body left'
+    'body body body body bottom'
+    'body body body body bottom'
+    'footer footer footer footer footer';
+    background-image: url("give (3).jpg");
+}
+h2 {
+    text-decoration: underline;
+}

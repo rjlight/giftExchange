@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<head>
+<title>Gift Exchange App</title>
+<link rel="stylesheet" type="text/css" href="gift.css">
+<meta name="viewport" content="width=device-width, initial-scale=1.0"> 
+</head>
+<body id="page">
+<h1 class="center">The Joy of <span id="special">Giving</span></h1>
+<div class="right">
+    <h2>Group Sign In</h2>
+    Username: <input type="text" name="username"><br>
+    Password: <input type="password" name="password"><br>
+    <input type="button" value="Log In" onclick="logIn()"> <!--display persons in database or no group members yet-->
+    <input type="button" value="New User" onclick="newUser()"> <!--add a second password checking box-->
+</div>
+<div class="left">
+    <h2>Add a single member</h2>
+    Name: <input type="text" name="nameSingle"><br>
+    Email: <input type="text" name="emailSingle"><br>
+    <input type="button" value="Add Member" onclick="addSingle()">
+</div>
+<div class="bottom">
+    <h2>Add a couple</h2>
+    Name Person 1: <input type="text" name="name1"><br>
+    Email Person 1: <input type="text" name="email1"><br><br>
+    Name Person 2: <input type="text" name="name2"><br>
+    Email Person 2: <input type="text" name="email2"><br>
+    <input type="button" value="Add Members" onclick="addCouple()">
+</div>
+<form class="body" action="../calc" method="get"> <!--go to the calc page to compute total-->
+    <p>stuff in center: names and names</p>
+</form>
+
+</body>
+</html>
