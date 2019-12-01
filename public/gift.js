@@ -2,7 +2,7 @@ function logIn() {
     //var request = new XMLHttpRequest()
 
     // Open a new connection, using the POST request on the URL endpoint
-    //request.open('POST', '', true) //for the database when up and running
+    //request.open('POST', 'postgres://giftadmin:gifty@localhost:5432/familygiftexchange', true) //for the database when up and running
   
    // request.onload = function() {
       // Begin accessing JSON data here
@@ -36,7 +36,7 @@ function assignNames() {
     //var request = new XMLHttpRequest()
 
     // Open a new connection, using the POST request on the URL endpoint
-   // request.open('POST', '', true) //for the database when up and running
+   // request.open('POST', 'postgres://giftadmin:gifty@localhost:5432/familygiftexchange', true) //for the database when up and running
     
    // request.onload = function() {
         // Begin accessing JSON data here
