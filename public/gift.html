@@ -27,9 +27,12 @@
     Email Person 2: <input type="text" name="email2"><br>
     <input type="button" value="Add Members" onclick="addCouple()">
 </div>
-<form class="body" action="../calc" method="get"> <!--go to the calc page to compute total-->
-    <p>stuff in center: names and names</p>
-</form>
+<div class="body"> <!--go to the calc page to compute total-->
+    <ul id="group">Once you log in, this will be replaced with group names!</ul>
+    <input type="button" value="Compute Exchange" onclick="assignNames()">
+    <input type="button" value="Email Group" onclick="emailGroup()">
+    <p>Warning, the current exchange list will be lost if you do not email it out</p>
+</div>
 
 </body>
 </html>
