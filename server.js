@@ -5,6 +5,11 @@ app.use(express.static('public'))
 app.set('views', __dirname + '/views');
 app.set('view engine', 'ejs');
 
+//In order to get POST variables
+var bodyParser = require('body-parser');
+app.use(bodyParser.json()); // support json encoded bodies
+app.use(bodyParser.urlencoded({ extended: true })); // support encoded bodies
+
 const { Pool } = require("pg");
 
 //database connection
