@@ -1,4 +1,24 @@
 function logIn() {
+  var username = $("#username").val(); //get info
+	var password = $("#password").val();
+
+	var params = {
+		username: username,
+		password: password
+  };
+  
+  $.post("/login", params, function(result) {
+
+		if (result && result.success) {
+			//$("#status").text("Successfully logged in.");
+      document.getElementById("group").innerHTML = result;
+		} else {
+
+			$("#status").text("Error logging in.");
+
+		}
+
+	});
     //var request = new XMLHttpRequest()
 
     // Open a new connection, using the POST request on the URL endpoint
@@ -13,24 +33,28 @@ function logIn() {
         for (i in data) { //put the names in a list
                   var txt = "<li>" + data[i] + "</li><br>" ;
             } 
-      } else*/ if (1 == 1) {
+      } else if (1 == 1) {
         var txt = "<li>" + "AJAX request worked!" + "</li><br>" ;
       } else  {
         console.log('error')
       }
           document.getElementById("group").innerHTML = txt;
-    //}
+          //add text to say user logged in instead of "new user created"
+    //}*/
       // Send request
      // request.send()
 }
 function newUser() {
     //query database to create a new group
+    //add text that says new user created, please log in
 }
 function addCouple() {
     //query db to add couple
+    //add text to say couple added!
 }
 function addSingle() {
     //query db to add single person
+    //add text to say single member added!
 }
 function assignNames() {
     //var request = new XMLHttpRequest()
@@ -54,6 +78,7 @@ function assignNames() {
         console.log('error')
         }
             document.getElementById("group").innerHTML = txt;
+            //get rid of all "added person" text
    // }
         // Send request
       //  request.send()

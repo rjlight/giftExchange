@@ -20,6 +20,23 @@ app.listen(app.get("port"), function() {
     console.log("Now listening for connections on port : ", app.get("port"));
 }); //will listen on above port
 
+app.post('/login', function(req, res) {
+    var username = req.body.username;
+    var password = req.body.password;
+
+    console.log("Username: " + username);
+    console.log("password: " + password);
+    //need to check if this matches db stuff
+    if (username == "admin" && password == "password") {
+        //store on the session
+        req.session.user = username;
+        res.json({success:true});
+      } 
+      else {
+       res.json({success:false});
+      }
+});
+
 function getGift(req, res){
     console.log("Getting gift info");
 
