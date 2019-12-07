@@ -14,13 +14,10 @@ function logIn() {
       console.log("in result");
       if (username_given == result.username && password_given == result.password) {
         $("#logged").text("Currently logged in");
-
-        document.getElementById("group").innerHTML = result.username;
       } else {
-        $("#logged").text("Invalid username or password.");
+        $("#logged").text("Error: Invalid username or password.");
       }
 		} else {
-
 			$("#logged").text("Error: Please enter username and password");
 		}
 	});
@@ -52,7 +49,12 @@ function logIn() {
 function showMembers() {
 
   $.post("/showMembers", function(result) {
-    $("#group").text("Group names!");
+    if (result) {
+      console.log("result in log" + result.group);
+      document.getElementById("group").innerHTML = result.group;
+		} else {
+      $("#group").text("Error: No user logged in");
+    }
   });
 }
 function newUser() {

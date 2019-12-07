@@ -5,6 +5,14 @@ second_person_name VARCHAR(35) NOT NULL,
 first_email        VARCHAR(35) NOT NULL,
 second_email       VARCHAR(35) NOT NULL
 );
+
+A join to show all group members
+
+SELECT c.first_person_name, c.second_person_name, s.single_name
+FROM couples c INNER JOIN association a ON c.couples_id = a.couples_id
+INNER JOIN singles s ON a.singles_id = s.single_id
+INNER JOIN groups g ON g.group_id = a.group_id; 
+
 CREATE TABLE singles (
 single_id    INT PRIMARY KEY,
 single_name  VARCHAR(35) NOT NULL,

@@ -48,6 +48,7 @@ app.post('/login', function(req, res) {
 
     pool.query(sqlu, paramu, function(err, result) {
         var status = {success:false};
+        req.session.loggedIn = false;
         console.log("in query");
         if(err) {
             console.log("Error with db occurred");
@@ -57,9 +58,9 @@ app.post('/login', function(req, res) {
 
             req.session.user = result.rows[0].group_username; //set session vars
             req.session.pass = result.rows[0].group_password; //before they are changed
-            
-            status = {"success":true, "username" :username, "password" :password};
+            req.session.loggedIn = true;
 
+            status = {"success":true, "username" :username, "password" :password};
         } 
         res.json(status);
     })
@@ -68,28 +69,33 @@ app.post('/login', function(req, res) {
 app.post("/showMembers", function(req, res) {
     console.log("session user: " + req.session.user);
     console.log("session password: " + req.session.pass);
-    
-    var username = req.session.user;
-    var password = req.session.pass;
-    
+
     //db select to show all members
-    var sqlu = "SELECT group_username, group_password FROM groups WHERE group_username = $1::varchar AND group_password = $2::varchar";
+    var sql = "SELECT c.first_person_name, c.second_person_name, s.single_name FROM couples c INNER JOIN association a ON c.couples_id = a.couples_id INNER JOIN singles s ON a.singles_id = s.single_id INNER JOIN groups g ON g.group_id = a.group_id"; 
 
-    var paramu = [username, password];
+    var status = {success:false}; //if no one is logged in = false
 
-    pool.query(sqlu, paramu, function(err, result) {
-        var status = {success:false};
-        console.log("in query");
-        if(err) {
-            console.log("Error with db occurred");
-            console.log(err);
-            callback(err, null); //pass error along the line
-        } else if (result.rows.length) {
-            //create a print statement for all names in db
-            status = {"success":true, "username" :username, "password" :password};
-        } 
-        res.json(status);
+    pool.query(sql, function(err, result) {
+        if (req.session.loggedIn) {
+            console.log("in query");
+            if(err) {
+                console.log("Error with db occurred");
+                console.log(err);
+                callback(err, null); //pass error along the line
+            } else if (result.rows.length) {
+                //create a print statement for all names in db
+                var group = "<li>" + result.rows[0].first_person_name + "</li><br>";
+                group += "<li>" + result.rows[0].second_person_name + "</li><br>";
+                group += "<li>" + result.rows[0].single_name + "</li><br>";
+                console.log("first name: " + result.rows[0].first_person_name);
+                console.log("second name: " + group);
+
+                req.session.group_before_exchange = group; //to use when we switch
+                status = {"success" : true, "group" : group};
+            } 
+        } res.json(status);
     })
+    
 });
 
 function getGift(req, res){
