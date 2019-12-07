@@ -59,3 +59,8 @@ ON association TO giftadmin;
 #may need to grant to individual tables
 
 GRANT USAGE, SELECT ON SEQUENCE association_assoc_id_seq TO giftadmin;
+
+queries
+
+SELECT group_username FROM groups WHERE group_username = 'Lights';
+SELECT group_password FROM groups WHERE group_password = 'lp';

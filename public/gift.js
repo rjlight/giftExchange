@@ -1,23 +1,28 @@
 function logIn() {
-  var username = $("#username").val(); //get info
-	var password = $("#password").val();
+  console.log("After log in button");
+  var username_given = $("#username").val(); //get info from user
+	var password_given = $("#password").val();
 
 	var params = {
-		username: username,
-		password: password
+		username: username_given,
+		password: password_given
   };
-  
-  $.post("/login", params, function(result) {
 
-		if (result && result.success) {
-			//$("#status").text("Successfully logged in.");
-      document.getElementById("group").innerHTML = result;
+  console.log("Before login funcion");
+  $.post("/login", params, function(result) {
+		if (result) {
+      console.log("in result");
+      if (username_given == result.username && password_given == result.password) {
+        $("#logged").text("Currently logged in");
+
+        document.getElementById("group").innerHTML = result.username;
+      } else {
+        $("#logged").text("Invalid username or password.");
+      }
 		} else {
 
-			$("#status").text("Error logging in.");
-
+			$("#logged").text("Error: Please enter username and password");
 		}
-
 	});
     //var request = new XMLHttpRequest()
 
@@ -43,6 +48,12 @@ function logIn() {
     //}*/
       // Send request
      // request.send()
+}
+function showMembers() {
+
+  $.post("/showMembers", function(result) {
+    $("#group").text("Group names!");
+  });
 }
 function newUser() {
     //query database to create a new group
