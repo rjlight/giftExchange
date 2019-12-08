@@ -24,17 +24,17 @@
 </div>
 <div class="left">
     <h2>Add a single member</h2>
-    Name: <input type="text" name="nameSingle"><br>
-    Email: <input type="text" name="emailSingle"><br>
+    Name: <input type="text" id="nameSingle"><br>
+    Email: <input type="text" id="emailSingle"><br>
     <input type="button" value="Add Member" onclick="addSingle()">
-    <p id="singleAdd"></p>
+    <p id="singleAdd">No members to add</p>
 </div>
 <div class="bottom">
     <h2>Add a couple</h2>
-    Name Person 1: <input type="text" name="name1"><br>
-    Email Person 1: <input type="text" name="email1"><br><br>
-    Name Person 2: <input type="text" name="name2"><br>
-    Email Person 2: <input type="text" name="email2"><br>
+    Name Person 1: <input type="text" id="name1"><br>
+    Email Person 1: <input type="text" id="email1"><br><br>
+    Name Person 2: <input type="text" id="name2"><br>
+    Email Person 2: <input type="text" id="email2"><br>
     <input type="button" value="Add Members" onclick="addCouple()">
     <p id="coupleAdd"></p>
 </div>
@@ -43,7 +43,7 @@
     <input type="button" value="Show Members" onclick="showMembers()">
     <input type="button" value="Compute Exchange" onclick="assignNames()">
     <input type="button" value="Email Group" onclick="emailGroup()">
-    <p>Warning, the current exchange list will be lost if you do not email it out</p>
+    <p>Warning: the current exchange list will be lost if you do not email it out</p>
 </div>
 
 </body>

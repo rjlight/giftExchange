@@ -47,7 +47,6 @@ function logIn() {
      // request.send()
 }
 function showMembers() {
-
   $.post("/showMembers", function(result) {
     if (result) {
       console.log("result in log" + result.group);
@@ -66,8 +65,31 @@ function addCouple() {
     //add text to say couple added!
 }
 function addSingle() {
-    //query db to add single person
-    //add text to say single member added!
+  var name_given = $("#nameSingle").val(); //get info from user
+	var email_given = $("#emailSingle").val();
+
+	var param = {
+		name : name_given,
+		email : email_given
+  };
+
+  $.post("/addSingles", param, function(result) {
+    if (result) {
+      console.log("person added to the db");
+      document.getElementById("singleAdd").innerHTML = "Member added!";
+		} else {
+      $("#singleAdd").text("Error: invalid username or password");
+    }
+  });
+
+  $.post("/addSingleGroup", function(result) {
+    if (result) {
+      console.log("Person Actually added");
+      document.getElementById("singleAdd").innerHTML = "Member added to DB!";
+		} else {
+      $("#singleAdd").text("Error: Cannot add to database");
+    }
+  });
 }
 function assignNames() {
     //var request = new XMLHttpRequest()

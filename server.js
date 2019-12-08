@@ -71,7 +71,7 @@ app.post("/showMembers", function(req, res) {
     console.log("session password: " + req.session.pass);
 
     //db select to show all members
-    var sql = "SELECT c.first_person_name, c.second_person_name, s.single_name FROM couples c INNER JOIN association a ON c.couples_id = a.couples_id INNER JOIN singles s ON a.singles_id = s.single_id INNER JOIN groups g ON g.group_id = a.group_id"; 
+    var sql = "SELECT c.first_person_name, c.second_person_name, s.single_name, g.group_id FROM couples c INNER JOIN association a ON c.couples_id = a.couples_id INNER JOIN singles s ON a.singles_id = s.single_id INNER JOIN groups g ON g.group_id = a.group_id"; 
 
     var status = {success:false}; //if no one is logged in = false
 
@@ -87,15 +87,69 @@ app.post("/showMembers", function(req, res) {
                 var group = "<li>" + result.rows[0].first_person_name + "</li><br>";
                 group += "<li>" + result.rows[0].second_person_name + "</li><br>";
                 group += "<li>" + result.rows[0].single_name + "</li><br>";
+                group += "<li>" + result.rows[1].single_name + "</li><br>";
                 console.log("first name: " + result.rows[0].first_person_name);
                 console.log("second name: " + group);
+
+                req.session.group_id = result.rows[0].group_id;
 
                 req.session.group_before_exchange = group; //to use when we switch
                 status = {"success" : true, "group" : group};
             } 
         } res.json(status);
     })
+});
+
+app.post("/addSingles", function(req, res) {
+    var name = req.body.name;
+    var email = req.body.email;
+
+    console.log("Single Name: " + name);
+    console.log("Email: " + email);
     
+    var sql = "INSERT INTO singles (single_id, single_name, single_email) VALUES (2, $1::varchar, $2::varchar)";
+
+    req.session.singleId = 2;
+
+    var param = [name, email];
+
+    var status = {success:false}; //if no one is logged in = false
+
+    pool.query(sql, param, function(err, result) {
+        if (req.session.loggedIn) {
+            if(err) {
+                console.log("Error with db occurred");
+                console.log(err);
+                callback(err, null); //pass error along the line
+            } else if (result.rows.length) {
+                status = {"success" : true}; //just need to know that it worked
+            } 
+        } res.json(status);
+    })
+});
+
+app.post("/addSingleGroup", function(req, res) {
+    var single_id = req.session.singleId;
+    var group_id;
+    console.log(id);
+
+    //must get the group_id
+    var sql = "INSERT INTO association (group_id, singles_id) VALUES ($1::int, $2::int)";
+    var param = [group_id, single_id];
+
+    var status = {success:false}; //if no one is logged in = false
+
+    pool.query(sql, param, function(err, result) {
+        if (req.session.loggedIn) {
+            if(err) {
+                console.log("Error with db occurred");
+                console.log(err);
+                callback(err, null); //pass error along the line
+            } else if (result.rows.length) {
+                status = {"success" : true}; //just need to know that it worked
+            } 
+        } res.json(status);
+    })
 });
 
 function getGift(req, res){

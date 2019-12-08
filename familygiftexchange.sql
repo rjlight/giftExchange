@@ -8,10 +8,15 @@ second_email       VARCHAR(35) NOT NULL
 
 A join to show all group members
 
-SELECT c.first_person_name, c.second_person_name, s.single_name
-FROM couples c INNER JOIN association a ON c.couples_id = a.couples_id
-INNER JOIN singles s ON a.singles_id = s.single_id
-INNER JOIN groups g ON g.group_id = a.group_id; 
+SELECT c.first_person_name, c.second_person_name, s.single_name, g.group_id 
+FROM couples c INNER JOIN association a ON c.couples_id = a.couples_id 
+INNER JOIN singles s ON a.singles_id = s.single_id 
+INNER JOIN groups g ON g.group_id = a.group_id;
+
+SELECT c.first_person_name, c.second_person_name, s.single_name, g.group_id 
+FROM couples c INNER JOIN association a ON c.couples_id = g.couples_id 
+INNER JOIN singles s ON a.singles_id = s.single_id 
+INNER JOIN groups g ON g.group_id = a.group_id;
 
 CREATE TABLE singles (
 single_id    INT PRIMARY KEY,
@@ -72,3 +77,5 @@ queries
 
 SELECT group_username FROM groups WHERE group_username = 'Lights';
 SELECT group_password FROM groups WHERE group_password = 'lp';
+
+DELETE FROM singles WHERE single_id = 2;
