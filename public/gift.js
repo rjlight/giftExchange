@@ -24,6 +24,8 @@ function logIn() {
 }
 
 function showMembers() {
+  document.getElementById("singleAdd").innerHTML = "Please show members each time before adding members";
+  document.getElementById("coupleAdd").innerHTML = "Please show members each time before adding members";
   $.post("/showMembers", function(result) {
     console.log("in show members");
     if (result.success) {

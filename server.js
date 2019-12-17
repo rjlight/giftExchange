@@ -75,10 +75,10 @@ app.post("/showMembers", function(req, res) {
 
     var sql;
     var status = {success:false}; //if no one is logged in = false
-    var count = 1; //for singles
-    var ccount = 1; //for couples
-    req.session.count = count; //reset the count
-    req.session.ccount = ccount; //reset the count 
+    var count = 2; //for singles
+    var ccount = 2; //for couples
+    req.session.count = 1; //reset the count
+    req.session.ccount = 1; //reset the count 
     req.session.group_before_exchange = "";
 
     //will use this to compute exchange
@@ -485,7 +485,7 @@ app.post("/addSingles", function(req, res) {
     var email = req.body.email;
     var group_id = req.session.group_id;
 
-    console.log("count #: " + req.session.count + " couples: " + req.session.ccount);
+    console.log("count # singles: " + req.session.count + " couples: " + req.session.ccount);
     console.log("group id: " + req.session.group_id);
     console.log("Single Name: " + name);
     console.log("logged in: " + req.session.loggedIn);
