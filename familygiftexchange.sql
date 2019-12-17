@@ -74,6 +74,8 @@ group_id INT,
 FOREIGN KEY (group_id) REFERENCES groups (group_id)
 );
 
+SELECT group_id FROM account;
+
 INSERT INTO groups (group_id, single_name1, c_first_name1, c_second_name1, single_email1, couple_email1)
 VALUES (1, 'liz', 'Brent', 'Rachel', 'liz@yes', 'b@yes');
 
@@ -118,6 +120,11 @@ FROM groups g INNER JOIN account a ON g.group_id = a.group_id;
 
 GRANT ALL PRIVILEGES ON account TO giftadmin;
 GRANT ALL PRIVILEGES ON groups TO giftadmin;
+GRANT USAGE, SELECT ON SEQUENCE account_a_id_seq TO giftadmin;
+
+SELECT single_name1, single_name2, single_name3, single_name4 FROM groups WHERE group_id = 1;
+DELETE FROM groups WHERE c_first_name2 = 'Timmo' AND c_second_name2 ='Debryn';  c_first_name3, c_second_name3, c_first_name5, c_second_name5, c_first_name4, c_second_name4 FROM groups WHERE group_id = 1;
+SELECT c_first_name2, c_second_name2,  c_first_name3, c_second_name3, c_first_name5, c_second_name5, c_first_name4, c_second_name4 FROM groups WHERE group_id = 1;
 
 --updated db--
 CREATE TABLE couples (
@@ -281,6 +288,7 @@ ON association TO giftadmin;
 #may need to grant to individual tables
 
 GRANT USAGE, SELECT ON SEQUENCE association_assoc_id_seq TO giftadmin;
+GRANT USAGE, SELECT ON SEQUENCE account_a_id_seq TO giftadmin;
 
 queries
 

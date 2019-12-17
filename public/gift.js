@@ -34,13 +34,82 @@ function showMembers() {
     }
   });
 }
-function newUser() {
-    //query database to create a new group
-    //add text that says new user created, please log in
+
+function getGroupId() {
+  $.post("/getGroupId", function(result) {
+    console.log("in getGroupId");
+    if (result.success) {
+      console.log("got the group id: " + result.message);
+		} else {
+      console.log("some error occured");
+    }
+  });
 }
+
+function makeAccount() {
+  var username_given = $("#username").val(); //get info from user
+  var password_given = $("#password").val();
+  
+  console.log("username given: " + username_given);
+
+	var paramus = {
+		username: username_given,
+		password: password_given
+  };
+
+  console.log(paramus);
+
+  $.post("/createAccount", paramus, function(result) {
+    console.log("in create account");
+    if (result.success) {
+      $("#logged").text(result.message);
+      console.log("created account: " + result.message);
+		} else {
+      console.log("some error occured in createAccount");
+    }
+  });
+}
+
+function newUser() {
+  console.log("After new user");
+
+  window.setTimeout(getGroupId, 1);
+  window.setTimeout(createGroup, 1500);
+  window.setTimeout(makeAccount, 3000);
+}
+
+function createGroup() {
+  $.post("/createGroup", function(result) {
+    console.log("in create group");
+    if (result.success) {
+      console.log("created group: "+ result.message);
+		} else {
+      console.log("some error occured in createGroup");
+    }
+  });
+}
+
 function addCouple() {
-    //query db to add couple
-    //add text to say couple added!
+  var name_given1 = $("#name1").val(); //get info from user
+  var name_given2 = $("#name2").val(); 
+	var email_given = $("#email1").val();
+
+	var param = {
+    name1 : name_given1,
+    name2 : name_given2,
+		email : email_given
+  };
+
+  $.post("/addCouples", param, function(result) {
+    console.log(result.message);
+    console.log(result.success);
+    if (result.success) {
+      console.log("persons added to the db");
+      document.getElementById("coupleAdd").innerHTML = "Members added!";
+		} else {
+      $("#coupleAdd").text(result.message);
+    }
+  });
 }
 
 function addSingle() {
@@ -65,34 +134,24 @@ function addSingle() {
 }
 
 function assignNames() {
-    //var request = new XMLHttpRequest()
-
-    // Open a new connection, using the POST request on the URL endpoint
-   // request.open('POST', 'postgres://giftadmin:gifty@localhost:5432/familygiftexchange', true) //for the database when up and running
-    
-   // request.onload = function() {
-        // Begin accessing JSON data here
-     //   var data = JSON.parse(this.response)
-    
-        //will be accessing names from the db
-    /*    if (request.status >= 200 && request.status < 400) {
-        for (i in data) { //put the names in a list
-                    var txt = "<li>" + data[i] + "</li><br>" ;
-            } 
-        } else */if (1 == 1) {
-        var txt = "<li>" + "AJAX request worked again! - Assigned names!" + "</li><br>";
-        txt = "<li>" + "Me - You" + "</li><br>"
-        } else  {
-        console.log('error')
-        }
-            document.getElementById("group").innerHTML = txt;
-            //get rid of all "added person" text
-   // }
-        // Send request
-      //  request.send()
+  $.post("/assignNames", function(result) {
+    console.log("in assignNames");
+    if (result.success) {
+      console.log("result in log" + result.mixed);
+      document.getElementById("group").innerHTML = result.mixed;
+		} else {
+      $("#group").text("Error: No user logged in");
+    }
+  });
 }
 function emailGroup() {
-    //do something to send this email list to the whole group 
-    //will need to query for the emails of each member
-    //will need to query to recreate the list and then email
+  $.post("/emailGroup", function(result) {
+    console.log("in assignNames");
+    if (result.success) {
+      console.log("emails saved");
+      document.getElementById("group").innerHTML = "Emails sent!";
+		} else {
+      $("#group").text("Error: No user logged in");
+    }
+  });
 }  

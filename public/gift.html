@@ -32,18 +32,19 @@
 <div class="bottom">
     <h2>Add a couple</h2>
     Name Person 1: <input type="text" id="name1"><br>
-    Email Person 1: <input type="text" id="email1"><br><br>
     Name Person 2: <input type="text" id="name2"><br>
-    Email Person 2: <input type="text" id="email2"><br>
+    Email for couple: <input type="text" id="email1"><br><br>
     <input type="button" value="Add Members" onclick="addCouple()">
     <p id="coupleAdd">Please show members each time before adding members</p>
 </div>
 <div class="body"> <!--go to the calc page to compute total-->
+    <h3>Giver - Giftee</h3>
     <ul id="group">Once you log in, this will be replaced with group names!</ul>
     <input type="button" value="Show Members" onclick="showMembers()">
     <input type="button" value="Compute Exchange" onclick="assignNames()">
     <input type="button" value="Email Group" onclick="emailGroup()">
     <p>Warning: the current exchange list will be lost if you do not email it out</p>
+    <h4>*if a giver is the same as the giftee, simple compute the exchange again</h4>
 </div>
 
 </body>

@@ -68,6 +68,18 @@
 h2 {
     text-decoration: underline;
 }
+h3 {
+    text-decoration: underline;
+    color: darkred;
+}
 p {
+    font-weight: bold;
     font-size: smaller;
+}
+h4 {
+    color: darkred;
+    font-size: smaller;
+}
+ul {
+    font-weight: bold;
 }
