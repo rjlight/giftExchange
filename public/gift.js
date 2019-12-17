@@ -145,8 +145,24 @@ function assignNames() {
   });
 }
 function emailGroup() {
+  window.setTimeout(getEmails, 1);
+  window.setTimeout(sendEmails, 500);;
+}  
+
+function getEmails() {
+  $.post("/getEmail", function(result) {
+    console.log("in getEmails");
+    if (result.success) {
+      console.log("got emails");
+		} else {
+      $("#group").text("Error: No user logged in");
+    }
+  });
+}
+
+function sendEmails() {
   $.post("/emailGroup", function(result) {
-    console.log("in assignNames");
+    console.log("in send emails");
     if (result.success) {
       console.log("emails saved");
       document.getElementById("group").innerHTML = "Emails sent!";
@@ -154,4 +170,4 @@ function emailGroup() {
       $("#group").text("Error: No user logged in");
     }
   });
-}  
+}

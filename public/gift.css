@@ -63,7 +63,7 @@
     'body body body body bottom'
     'body body body body bottom'
     'footer footer footer footer footer';
-    background-image: url("give (3).jpg");
+    background-image: url("give (4).jpg");
 }
 h2 {
     text-decoration: underline;
@@ -82,4 +82,13 @@ h4 {
 }
 ul {
     font-weight: bold;
+}
+.button {
+    background-color: gainsboro;
+    color: black;
+    padding: 4px;
+    border-radius: 8px;
+}
+#little {
+    font-size: medium;
 }

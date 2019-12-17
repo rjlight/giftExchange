@@ -128,7 +128,20 @@ app.post("/showMembers", function(req, res) {
                     req.session.to_sort[i++] += result.rows[0].single_name1;
                     req.session.group_before_exchange += "<li>" + result.rows[0].single_name1 + " </li><br>";
                     req.session.count = count++;
-                } 
+                } else if (result.rows[0].c_first_name1 == undefined) {
+                    req.session.to_sort[i] = ''
+                    req.session.to_sort[i++] += result.rows[0].c_first_name1
+                    req.session.to_sort[i] = ''
+                    req.session.to_sort[i++] += result.rows[0].c_second_name1
+                    req.session.group_before_exchange += "<li>" + result.rows[0].c_first_name1 + " </li><br>";
+                    req.session.group_before_exchange += "<li>" + result.rows[0].c_second_name1 + " </li><br>";
+                    req.session.ccount = ccount; //first time through we need to not inc.
+                } else if (result.rows[0].single_name1 == undefined) {
+                    req.session.to_sort[i] = ''
+                    req.session.to_sort[i++] += result.rows[0].single_name1;
+                    req.session.group_before_exchange += "<li>" + result.rows[0].single_name1 + " </li><br>";
+                    req.session.count = count;
+                }
                 if (result.rows[0].c_first_name2 && result.rows[0].single_name2) {
                     req.session.to_sort[i] = ''
                     req.session.to_sort[i++] += result.rows[0].single_name2;
@@ -556,7 +569,7 @@ app.post("/addCouples", function(req, res) {
     })  
 });
 
-app.post("/emailGroup", function(req, res)  {
+app.post("/getEmail", function(req, res)  {
     var sql;
     var status = {success:false}; //if no one is logged in = false
      
@@ -659,23 +672,26 @@ app.post("/emailGroup", function(req, res)  {
         }
         res.json(status);
         })    
+});
 
+app.post("/emailGroup", function(req, res) {
     var transporter = nodemailer.createTransport({
-        service: 'yahoo',
-        auth: {
-          user: 'giftgiver83@yahoo.com',
-          pass: 'cs313WebEng'
-        }
-      });
+    service: 'yahoo',
+    auth: {
+        user: 'giftgiver83@yahoo.com',
+        pass: 'qdaeleselsstyvsm'
+    }
+    });
       
     var to_who = '';  
     to_who = '\'' + req.session.emails + '\'';
+    console.log(" to whoo: "  + to_who);
     var html = '';
     html = '\'' + req.session.mixed + '\'';
 
     var mailOptions = {
-    from: 'chubiss18@gmail.com',
-    to: to_who, //need to put emails
+    from: 'giftgiver83@yahoo.com',
+    to: to_who, //to_who, //need to put emails
     subject: 'Family Gift Exchange Assignments',
     html: html
     };
@@ -685,7 +701,8 @@ app.post("/emailGroup", function(req, res)  {
         console.log(error);
     } else {
         console.log('Email sent: ' + info.response);
+        status = {"success" : true};
+        res.json(status);
     }
     });
-
 });

@@ -91,6 +91,10 @@ UPDATE groups
 SET single_email[number] = 'annie@yahoo.com', single_name[samenumber] ='anna'
 WHERE group_id = 1;
 
+UPDATE groups
+SET single_email1 = 'chubiss18@gmail.com', couple_email1 = 'chubiss18@gmail.com'
+WHERE group_id = 1;
+
 --couple update
 UPDATE groups
 SET c_first_name[] = 'annie@yahoo.com', c_second_name[] = , couple_email[] =
@@ -109,8 +113,8 @@ INSERT INTO account (a_username, a_password, group_id)
 VALUES ('Lights', 'lp', 1);
 
 UPDATE groups
-SET single_email2 = 'annie@yahoo.com', single_name2 ='anna'
-WHERE group_id = 1;
+SET single_email2 = 'chubiss18@gmail.com', single_name1 = 'Kyrah'
+WHERE group_id = 2;
 
 SELECT g.single_name1, g.c_first_name1, g.c_second_name1
 FROM groups g INNER JOIN account a ON g.group_id = a.group_id;

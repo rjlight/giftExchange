@@ -13,20 +13,22 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0"> 
 </head>
 <body id="page">
-<h1 class="center">The Joy of <span id="special">Giving</span></h1>
+<h1 class="center">The Joy of <span id="special">Giving</span>
+    <br> <span id="little">~ A gift giving application for friends and family ~</span>
+</h1>
 <div class="right">
     <h2>Group Sign In</h2>
     Username: <input type="text" id="username" name="username"><br>
-    Password:  <input type="password" id="password" name="password"><br>
-    <input type="button" value="Log In" onclick="logIn()"> <!--display persons in database or no group members yet-->
-    <input type="button" value="New User" onclick="newUser()"> <!--add a second password checking box-->
+    Password:  <input type="password" id="password" name="password"><br><br>
+    <input type="button" class="button" value="Log In" onclick="logIn()"> <!--display persons in database or no group members yet-->
+    <input type="button" class="button" value="New User" onclick="newUser()"> <!--add a second password checking box-->
     <p id="logged">No user logged in</p>
 </div>
 <div class="left">
     <h2>Add a single member</h2>
     Name: <input type="text" id="nameSingle"><br>
-    Email: <input type="text" id="emailSingle"><br>
-    <input type="button" value="Add Member" onclick="addSingle()">
+    Email: <input type="text" id="emailSingle"><br><br>
+    <input type="button" class="button" value="Add Member" onclick="addSingle()">
     <p id="singleAdd">Please show members each time before adding members</p>
 </div>
 <div class="bottom">
@@ -34,17 +36,17 @@
     Name Person 1: <input type="text" id="name1"><br>
     Name Person 2: <input type="text" id="name2"><br>
     Email for couple: <input type="text" id="email1"><br><br>
-    <input type="button" value="Add Members" onclick="addCouple()">
+    <input type="button" class="button" value="Add Members" onclick="addCouple()">
     <p id="coupleAdd">Please show members each time before adding members</p>
 </div>
 <div class="body"> <!--go to the calc page to compute total-->
     <h3>Giver - Giftee</h3>
     <ul id="group">Once you log in, this will be replaced with group names!</ul>
-    <input type="button" value="Show Members" onclick="showMembers()">
-    <input type="button" value="Compute Exchange" onclick="assignNames()">
-    <input type="button" value="Email Group" onclick="emailGroup()">
+    <input type="button" class="button" value="Show Members" onclick="showMembers()">
+    <input type="button" class="button" value="Compute Exchange" onclick="assignNames()">
+    <input type="button" class="button" value="Email Group - (30 seconds)" onclick="emailGroup()">
     <p>Warning: the current exchange list will be lost if you do not email it out</p>
-    <h4>*if a giver is the same as the giftee, simple compute the exchange again</h4>
+    <h4>*if a giver is the same as the giftee, simply compute the exchange again</h4>
 </div>
 
 </body>
