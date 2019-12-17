@@ -75,8 +75,8 @@ app.post("/showMembers", function(req, res) {
 
     var sql;
     var status = {success:false}; //if no one is logged in = false
-    var count = 2; //for singles
-    var ccount = 2; //for couples
+    var count = 1; //for singles
+    var ccount = 1; //for couples
     req.session.count = count; //reset the count
     req.session.ccount = ccount; //reset the count 
     req.session.group_before_exchange = "";
@@ -128,20 +128,7 @@ app.post("/showMembers", function(req, res) {
                     req.session.to_sort[i++] += result.rows[0].single_name1;
                     req.session.group_before_exchange += "<li>" + result.rows[0].single_name1 + " </li><br>";
                     req.session.count = count++;
-                } else if (result.rows[0].c_first_name1 == undefined) {
-                    req.session.to_sort[i] = ''
-                    req.session.to_sort[i++] += result.rows[0].c_first_name1
-                    req.session.to_sort[i] = ''
-                    req.session.to_sort[i++] += result.rows[0].c_second_name1
-                    req.session.group_before_exchange += "<li>" + result.rows[0].c_first_name1 + " </li><br>";
-                    req.session.group_before_exchange += "<li>" + result.rows[0].c_second_name1 + " </li><br>";
-                    req.session.ccount = ccount; //first time through we need to not inc.
-                } else if (result.rows[0].single_name1 == undefined) {
-                    req.session.to_sort[i] = ''
-                    req.session.to_sort[i++] += result.rows[0].single_name1;
-                    req.session.group_before_exchange += "<li>" + result.rows[0].single_name1 + " </li><br>";
-                    req.session.count = count;
-                }
+                } 
                 if (result.rows[0].c_first_name2 && result.rows[0].single_name2) {
                     req.session.to_sort[i] = ''
                     req.session.to_sort[i++] += result.rows[0].single_name2;
